@@ -2,95 +2,45 @@ interface LogoProps {
   width?: number
   height?: number
   className?: string
+  /**
+   * `light` = for light backgrounds (nav, app screens).
+   * `dark`  = for the footer: lighter strokes, and the inner circle is
+   *           filled with the footer background instead of white so the
+   *           "hole" in the aperture doesn't glow. (Guide §1.4)
+   */
+  variant?: 'light' | 'dark'
 }
 
-export default function Logo({ width = 40, height = 40, className = '' }: LogoProps) {
+export default function Logo({
+  width = 40,
+  height = 40,
+  className = '',
+  variant = 'light',
+}: LogoProps) {
+  const stroke = variant === 'dark' ? '#4DA6FF' : '#2E86F0'
+  const innerFill = variant === 'dark' ? '#0f1320' : '#ffffff'
+
   return (
-    <svg 
-      width={width} 
-      height={height} 
-      viewBox="0 0 40 40" 
-      fill="none" 
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 26 26"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      role="img"
+      aria-label="Yalbum"
     >
-      {/* Outer circle - camera lens ring */}
-      <circle 
-        cx="20" 
-        cy="20" 
-        r="18" 
-        stroke="url(#logo-gradient)" 
-        strokeWidth="2.5"
-        fill="none"
-      />
-      
-      {/* Aperture blades - creating an aperture effect */}
-      <g opacity="0.9">
-        <path 
-          d="M20 8 L20 15" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M28.66 13 L24.33 17.33" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M32 20 L25 20" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M28.66 27 L24.33 22.67" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M20 32 L20 25" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M11.34 27 L15.67 22.67" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M8 20 L15 20" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-        <path 
-          d="M11.34 13 L15.67 17.33" 
-          stroke="url(#logo-gradient)" 
-          strokeWidth="2" 
-          strokeLinecap="round"
-        />
-      </g>
-      
-      {/* Center circle */}
-      <circle 
-        cx="20" 
-        cy="20" 
-        r="4" 
-        fill="url(#logo-gradient)"
-      />
-      
-      {/* Gradient definition */}
-      <defs>
-        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3b82f6" />
-          <stop offset="100%" stopColor="#14b8a6" />
-        </linearGradient>
-      </defs>
+      {/* Lens ring */}
+      <circle cx="13" cy="13" r="11" fill="none" stroke={stroke} strokeWidth="1.6" />
+
+      {/* Crosshair */}
+      <line x1="6.2" y1="6.2" x2="19.8" y2="19.8" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="19.8" y1="6.2" x2="6.2" y2="19.8" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
+
+      {/* Center dot, punched out of the crosshair by an opaque backing circle */}
+      <circle cx="13" cy="13" r="3.1" fill={innerFill} />
+      <circle cx="13" cy="13" r="1.9" fill="#4DA6FF" />
     </svg>
   )
 }

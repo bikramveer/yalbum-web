@@ -35,7 +35,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import LandingPage from '@/components/LandingPage'
+import SiteLanding from '@/components/site/SiteLanding'
  
 // Server Component - no client-side JavaScript needed!
 export default async function Home() {
@@ -68,7 +68,7 @@ export default async function Home() {
   const { data: { session } } = await supabase.auth.getSession()
   
   if (!session) {
-    return <LandingPage />
+    return <SiteLanding />
   }
  
   // Check user's albums
