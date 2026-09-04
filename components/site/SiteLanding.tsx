@@ -2,6 +2,10 @@ import Nav from './Nav'
 import Hero from './Hero'
 import Divider from './Divider'
 import Features from './Features'
+import Showcase from './Showcase'
+import Steps from './Steps'
+import CtaBanner from './CtaBanner'
+import Footer from './Footer'
 
 /**
  * The marketing site — one long-scroll page, 7 sections (Guide §3.3).
@@ -15,11 +19,11 @@ export default function SiteLanding() {
         <Hero />
         <Divider />
         <Features />
-        {/* Showcase        — §3.3 */}
-        {/* How it works    — §3.3  id="how-it-works" */}
-        {/* CTA banner      — §3.3  id="download" */}
+        <Showcase />
+        <Steps />
+        <CtaBanner />
       </main>
-      {/* Footer          — §3.3 */}
+      <Footer />
     </div>
   )
 }

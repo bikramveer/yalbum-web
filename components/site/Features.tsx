@@ -3,30 +3,8 @@ import { Image as ImageIcon, Users, MessageCircle, type LucideIcon } from 'lucid
 /**
  * Features — Guide §3.3
  *
- * YOUR TURN.
- *
- * Section shell:
- *   - id="features"  (§3.5 — the nav links here)
- *   - white background, ~90-100px vertical padding, 56px sides
- *   - scroll-mt-24 so the floating nav doesn't cover the heading when
- *     you jump to the anchor
- *   - inner wrapper: mx-auto max-w-content
- *
- * Header block, centred:
- *   - <h2> HEADING — font-display text-h2 font-bold text-ink-web
- *   - <p>  SUBHEAD — text-ink-body, max-w-[560px], mx-auto
- *
- * Card grid:
- *   - 3 columns from `lg`, 2 from `md`, 1 below. gap-[22px].
- *   - Map over FEATURES. Each card:
- *       · background: the accent's `gradient`, via a style prop
- *       · border: 1px, the accent's `border` class
- *       · rounded-card, p-8
- *       · icon chip: 54px square, rounded-2xl, grid place-items-center,
- *         using the accent's `chip` classes, icon at h-6 w-6
- *       · title: font-display text-card-title font-bold text-ink-web
- *       · body:  text-ink-body
- *       · hover lift: transition hover:-translate-y-1  (§1.6)
+ * Three cards, one per pastel accent. `scroll-mt-24` keeps the heading clear
+ * of the floating nav when the anchor is jumped to (§3.5).
  */
 
 const HEADING = 'Everything a shared album should be'
@@ -43,17 +21,17 @@ const SUBHEAD =
  */
 const ACCENTS = {
   blue: {
-    gradient: 'linear-gradient(160deg, #DCEEFF, #ffffff)',
+    gradient: 'linear-gradient(160deg, #f4f9ff, #ffffff)',
     border: 'border-blue-tint',
     chip: 'bg-blue-tint text-blue-icon',
   },
   mint: {
-    gradient: 'linear-gradient(160deg, #D6F7EC, #ffffff)',
+    gradient: 'linear-gradient(160deg, #f3fdf9, #ffffff)',
     border: 'border-mint-tint',
     chip: 'bg-mint-tint text-mint-icon',
   },
   violet: {
-    gradient: 'linear-gradient(160deg, #EEE3FF, #ffffff)',
+    gradient: 'linear-gradient(160deg, #faf7ff, #ffffff)',
     border: 'border-violet-tint',
     chip: 'bg-violet-tint text-violet-icon',
   },
@@ -89,34 +67,34 @@ const FEATURES: Feature[] = [
 
 export default function Features() {
   return (
-    <section id="features" className='px-14 bg-white py-3 scroll-mt-24 pb-16'>
+    <section id="features" className='bg-white py-24 scroll-mt-24'>
       {/* TODO */}
       <div className='mx-auto max-w-content px-14'>
         
         <div>
-          <h2 className='font-display text-showcase-h2 text-center font-bold text-ink-web'>
+          <h2 className='font-display text-h2 text-center font-bold text-ink-web'>
             {HEADING}
           </h2>
-          <p className='max-w-[560px] mx-auto text-ink-body text-center py-6'>
+          <p className='max-w-[560px] mx-auto text-ink-body text-center py-6 mb-8'>
             {SUBHEAD}
           </p>
         </div>
 
-        <div className='flex mx-auto max-w-content gap-5 space-evenly'>
+        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {FEATURES.map((feature) => {
             const Icon = feature.icon
             const accent = ACCENTS[feature.accent]
             return (
-              <article key={feature.title} style={{ background: accent.gradient }} className='rounded-xl p-12 border border-[accent]/40'>
-               <div className=''>
+              <article key={feature.title} style={{ background: accent.gradient }} className={`rounded-card border p-8 ${accent.border} transition hover:-translate-y-1`}>
+               <div className={`grid h-14 w-14 place-items-center rounded-2xl ${accent.chip}`}>
                  <Icon className='h-6 w-6' />
-                 <h3 className='font-display font-bold text-ink-web text-showcase'>
-                  {feature.title}
-                 </h3>
-                 <p>
-                  {feature.body}
-                 </p>
-               </div>
+                </div>
+                <h3 className='mt-6 font-display font-bold text-ink-web text-card-title'>
+                {feature.title}
+                </h3>
+                <p className='mt-3 text-ink-body'>
+                {feature.body}
+                </p>
               </article>
             )
           })}
