@@ -52,10 +52,10 @@ const STEPS: { accent: keyof typeof STEP_ACCENTS; title: string; body: string }[
 
 export default function Steps() {
   return (
-    <section id="how-it-works" className='bg-[image:var(--steps-bg)] py-24 px-14 scroll-mt-24 text-center'>
+    <section id="how-it-works" className='bg-[image:var(--steps-bg)] py-14 px-5 md:px-10 md:py-[70px] lg:px-14 lg:py-24 scroll-mt-24 text-center'>
       <div className='mx-auto max-w-content space-y-5'>
         <Eyebrow className='text-brand'>{EYEBROW}</Eyebrow>
-        <h2 className='font-display font-bold text-h2 text-ink-web'>{HEADING}</h2>
+        <h2 className='font-display font-bold text-h2-mobile lg:text-h2 text-ink-web'>{HEADING}</h2>
       </div>
       <div className='mx-auto max-w-[1000px] grid gap-6 md:grid-cols-3 text-center mt-10'>
         {STEPS.map((step, i) => {

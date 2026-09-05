@@ -67,12 +67,12 @@ const FEATURES: Feature[] = [
 
 export default function Features() {
   return (
-    <section id="features" className='bg-white py-24 scroll-mt-24'>
+    <section id="features" className='bg-white py-14 md:py-[70px] lg:py-24 scroll-mt-24'>
       {/* TODO */}
-      <div className='mx-auto max-w-content px-14'>
+      <div className='mx-auto max-w-content px-5 md:px-10 lg:px-14'>
         
         <div>
-          <h2 className='font-display text-h2 text-center font-bold text-ink-web'>
+          <h2 className='font-display text-h2-mobile lg:text-h2 text-center font-bold text-ink-web'>
             {HEADING}
           </h2>
           <p className='max-w-[560px] mx-auto text-ink-body text-center py-6 mb-8'>

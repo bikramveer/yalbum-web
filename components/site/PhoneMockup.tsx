@@ -30,6 +30,20 @@ interface PhoneMockupProps {
   screen: 'albums-home' | 'album-view'
   /** Multiplier on the 650×1406 design frame. §3.3 uses 0.6 / 0.56. */
   scale?: number
+  /**
+   * Scale below `md`. §3.4 uses ~0.5 (hero) and ~0.48 (showcase).
+   *
+   * Props can't be made responsive — there's no `md:scale={0.6}` — so this
+   * is applied as a CSS transform through a custom property, which media
+   * queries *can* switch off. Hence `scale-[var(--phone-scale)] md:scale-100`.
+   */
+  mobileScale?: number
+  /**
+   * Height the frame is cropped to below `md`, in px (§3.2). The phone is
+   * taller than a phone screen, so it gets trimmed and faded rather than
+   * shrunk to fit.
+   */
+  cropHeight?: number
   /** Idle float, desktop only (§1.6). */
   float?: 'floaty' | 'floaty2' | false
   /** CSS colour the mobile crop fades into. Must match the section bg. */
@@ -45,6 +59,8 @@ const LABELS: Record<PhoneMockupProps['screen'], string> = {
 export default function PhoneMockup({
   screen,
   scale = 0.6,
+  mobileScale,
+  cropHeight,
   float = false,
   fadeTo,
   className = '',
@@ -56,11 +72,30 @@ export default function PhoneMockup({
   const floatClass =
     float === 'floaty' ? 'lg:animate-floaty' : float === 'floaty2' ? 'lg:animate-floaty2' : ''
 
+  // Ratio, not an absolute size — the frame renders at desktop dimensions and
+  // is scaled down below `md`. `origin-top` keeps it anchored under the text
+  // instead of shrinking toward its own centre.
+  const scaleClass = mobileScale
+    ? 'origin-top scale-[var(--phone-scale)] md:scale-100'
+    : ''
+
+  const cropClass = cropHeight
+    ? 'max-h-[var(--phone-crop)] overflow-hidden md:max-h-none md:overflow-visible'
+    : ''
+
   return (
-    <div className={`relative ${className}`}>
+    <div
+      className={`relative ${cropClass} ${className}`}
+      style={
+        {
+          '--phone-scale': mobileScale ? String(mobileScale / scale) : undefined,
+          '--phone-crop': cropHeight ? `${cropHeight}px` : undefined,
+        } as React.CSSProperties
+      }
+    >
       <div
         style={{ width, height }}
-        className={`relative overflow-hidden rounded-[44px] border-[10px] border-ink-web bg-surface-alt drop-shadow-phone ${floatClass}`}
+        className={`relative overflow-hidden rounded-[44px] border-[10px] border-ink-web bg-surface-alt drop-shadow-phone ${scaleClass} ${floatClass}`}
       >
         {/* Dynamic island — what makes the frame read as a phone */}
         <div

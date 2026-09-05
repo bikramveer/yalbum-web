@@ -40,7 +40,7 @@ const LINK_COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className='bg-footer-bg px-14 py-14'>
+    <footer className='bg-footer-bg px-5 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14'>
       <div className='mx-auto max-w-content'>
         <div className='flex flex-col gap-10 md:flex-row md:justify-between'>
           <div className='flex gap-3 flex-col'>

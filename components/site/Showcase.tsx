@@ -34,12 +34,12 @@ const CHECKS: { accent: keyof typeof CHECK_ACCENTS; text: string }[] = [
 
 export default function Showcase() {
   return (
-    <section className='py-24 px-14'>
+    <section className='py-14 px-5 md:px-10 md:py-[70px] lg:px-14 lg:py-24'>
       <div className='mx-auto max-w-content rounded-panel bg-[image:var(--showcase-bg)] px-12 py-16'>
         <div className='grid gap-12 lg:grid-cols-2'>
           <div className='px-12 space-y-5 my-auto'>
             <Eyebrow className='text-brand'>{EYEBROW}</Eyebrow>
-            <h2 className='font-display text-showcase-h2 font-bold text-ink-web'>{HEADING}</h2>
+            <h2 className='font-display text-[28px] leading-tight lg:text-showcase-h2 font-bold text-ink-web'>{HEADING}</h2>
             <p className='text-ink-body'>{BODY}</p>
             <ul className='space-y-3'>
               {CHECKS.map((check) => {

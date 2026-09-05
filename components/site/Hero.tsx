@@ -28,7 +28,7 @@ const AVATARS = [
 
 export default function Hero() {
   return (
-    <section className='relative overflow-hidden bg-[image:var(--hero-bg)] pt-[150px] px-14 pb-[90px] '>
+    <section className='relative overflow-hidden bg-[image:var(--hero-bg)] pt-24 px-5 pb-14 md:px-10 md:pt-[120px] md:pb-[70px] lg:px-14 lg:pt-[150px] lg:pb-[90px]'>
       {/* Decorative blobs — outside the content wrapper so they bleed past
           the 1280px edge. The wrapper below is `relative` so text paints
           above them. */}
@@ -44,11 +44,11 @@ export default function Hero() {
             <span className="h-2 w-2 rounded-full bg-mint-icon " aria-hidden="true" />{BADGE_COPY}
           </div>
           
-          <h1 className='font-display text-hero font-bold text-ink-web'>
+          <h1 className='font-display text-hero-mobile md:text-[48px] lg:text-hero font-bold text-ink-web'>
             {HEADLINE}
           </h1>
 
-          <p className='text-hero-body text-ink-body max-w-[480px]'>
+          <p className='text-[17px] leading-relaxed lg:text-hero-body text-ink-body max-w-[480px]'>
             {BODY}
           </p>
 
